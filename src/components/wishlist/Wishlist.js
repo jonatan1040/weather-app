@@ -19,25 +19,31 @@ function Wishlist() {
   console.log("Wishlist favorites", favorites);
 
   function addToFavorite() {
-    const data = favorites.find((item) => item.Key === location.Key);
+    const data = favorites.find(
+      (item) => item.EpochTime === locationDetail.EpochTime
+    );
     console.log("Wishlist data1", data);
     if (data === undefined) {
       // setHeartColor("red");
       // const data = favorites.filter((item) => item.Key !== location.Key);
       console.log("Wishlist data2", data);
-      dispatch(setFavorites(location));
+      dispatch(setFavorites(locationDetail));
     }
   }
 
   function deleteFromFavorite() {
     // setHeartColor("white");
-    const data = favorites.filter((item) => item.Key !== location.Key);
+    const data = favorites.filter(
+      (item) => item.EpochTime !== locationDetail.EpochTime
+    );
     console.log("Wishlist data3", data);
     dispatch(removeFavorite(data));
   }
 
   useEffect(() => {
-    let data2 = favorites.find((item) => item.Key === location.Key);
+    let data2 = favorites.find(
+      (item) => item.EpochTime === locationDetail.EpochTime
+    );
     if (data2 === undefined) {
       setHeartColor("white");
     } else {
