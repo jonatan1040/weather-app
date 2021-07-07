@@ -15,9 +15,9 @@ function Location() {
     const promise = LocationData(location.Key);
     promise
       .then((res) => {
-        console.log("HERERHHERH", res.data[0]);
+        // console.log("HERERHHERH", res.data[0]);
         dispatch(locationDetail(res.data[0]));
-        console.log("HERERHHERH22222222222222222", locationDetails);
+        // console.log("HERERHHERH22222222222222222", locationDetails);
       })
       .catch((err) => {
         console.log("err", err);
@@ -35,8 +35,8 @@ function Location() {
           </p>
         ) : (
           <p>
-            {console.log("location", location)}
-            {console.log("locationDetail", locationDetails)}
+            {/* {console.log("location", location)} */}
+            {/* {console.log("locationDetail", locationDetails)} */}
           </p>
         )}
         <h1>{locationDetails ? locationDetails.WeatherText : ""}</h1>

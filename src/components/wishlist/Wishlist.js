@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setFavorites } from "../../slices/locationSlice";
+import { setFavorites, removeFavorite } from "../../slices/locationSlice";
 import heart from "../../images/heart.png";
 
 function Wishlist() {
-  const [heartColor, setHeartColor] = useState("white");
+  const [heartColor, setHeartColor] = useState();
   const dispatch = useDispatch();
 
   const location = useSelector((state) => state.locations.location);
@@ -13,42 +13,56 @@ function Wishlist() {
   );
   const locationDetail = useSelector((state) => state.locations.locationDetail);
   const favorites = useSelector((state) => state.locations.favorites);
-  console.log("location", location);
-  console.log("locationsByName", locationsByName);
-  console.log("locationDetail", locationDetail);
-  console.log("favorites", favorites);
+  console.log("Wishlist location", location);
+  console.log("Wishlist locationsByName", locationsByName);
+  console.log("Wishlist locationDetail", locationDetail);
+  console.log("Wishlist favorites", favorites);
 
   function addToFavorite() {
     const data = favorites.find((item) => item.Key === location.Key);
-    console.log("data1", data);
+    console.log("Wishlist data1", data);
     if (data === undefined) {
-      const data = favorites.filter((item) => item.Key !== location.Key);
-      console.log("data2", data);
-      dispatch(setFavorites(data));
+      // setHeartColor("red");
+      // const data = favorites.filter((item) => item.Key !== location.Key);
+      console.log("Wishlist data2", data);
+      dispatch(setFavorites(location));
     }
   }
 
   function deleteFromFavorite() {
+    // setHeartColor("white");
     const data = favorites.filter((item) => item.Key !== location.Key);
-    console.log("data2", data);
-    dispatch(setFavorites(data));
+    console.log("Wishlist data3", data);
+    dispatch(removeFavorite(data));
   }
+
+  useEffect(() => {
+    let data2 = favorites.find((item) => item.Key === location.Key);
+    if (data2 === undefined) {
+      setHeartColor("white");
+    } else {
+      setHeartColor("red");
+    }
+  });
 
   return (
     <div>
       <img
         src={heart}
         alt="wishlist"
-        style={{ width: "35px", height: "35px", backgroundColor: heartColor }}
+        style={{
+          width: "35px",
+          height: "35px",
+          backgroundColor: heartColor,
+        }}
       ></img>
+      {console.log("heartColor", heartColor)}
       <button
         onClick={() => {
           if (heartColor === "white") {
-            setHeartColor("red");
             addToFavorite();
           } else {
-            setHeartColor("white");
-            // deleteFromFavorite();
+            deleteFromFavorite();
           }
         }}
       >

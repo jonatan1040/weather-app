@@ -8,8 +8,8 @@ export function SearchData(localizedName, key = null) {
     params: {
       apikey:
         //   "CvlRcIeIULTeijAKlwtvhOrOXSBSonYt", //jonatan
-        "KBdCykosegYv5bcUX41egCavx9CYRCxF", //shlomi
-      // "KNBtrsLmUJN8jukFLPwfD2O2tNwTDvY2", //mayra
+        // "KBdCykosegYv5bcUX41egCavx9CYRCxF", //shlomi
+        "KNBtrsLmUJN8jukFLPwfD2O2tNwTDvY2", //mayra
       // "kMqbnAeg14A5d7GLAT5AiGgWtJ0hZk51", //ravit
       q: localizedName,
       language: "en-us",
@@ -28,8 +28,8 @@ export function getForecasts(key) {
     params: {
       apikey:
         //   "CvlRcIeIULTeijAKlwtvhOrOXSBSonYt", //jonatan
-        "KBdCykosegYv5bcUX41egCavx9CYRCxF", //shlomi
-      // "KNBtrsLmUJN8jukFLPwfD2O2tNwTDvY2", //mayra
+        // "KBdCykosegYv5bcUX41egCavx9CYRCxF", //shlomi
+        "KNBtrsLmUJN8jukFLPwfD2O2tNwTDvY2", //mayra
       // "kMqbnAeg14A5d7GLAT5AiGgWtJ0hZk51", //ravit
       language: "en-us",
       details: false,
@@ -48,8 +48,8 @@ export function LocationData(key) {
     params: {
       apikey:
         //   "CvlRcIeIULTeijAKlwtvhOrOXSBSonYt", //jonatan
-        "KBdCykosegYv5bcUX41egCavx9CYRCxF", //shlomi
-      // "KNBtrsLmUJN8jukFLPwfD2O2tNwTDvY2", //mayra
+        // "KBdCykosegYv5bcUX41egCavx9CYRCxF", //shlomi
+        "KNBtrsLmUJN8jukFLPwfD2O2tNwTDvY2", //mayra
       // "kMqbnAeg14A5d7GLAT5AiGgWtJ0hZk51", //ravit
       language: "en-us",
       details: false,

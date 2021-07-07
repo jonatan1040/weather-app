@@ -43,6 +43,10 @@ export const locationsSlice = createSlice({
       console.log("getForecasts", action.payload);
     },
     setFavorites: (state, action) => {
+      state.favorites = [...state.favorites, action.payload];
+      console.log("favorites", action.payload);
+    },
+    removeFavorite: (state, action) => {
       state.favorites = action.payload;
       console.log("favorites", action.payload);
     },
@@ -56,6 +60,7 @@ export const {
   setForecasts,
   locationDetail,
   setFavorites,
+  removeFavorite,
 } = locationsSlice.actions;
 
 export default locationsSlice.reducer;

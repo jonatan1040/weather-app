@@ -4,16 +4,16 @@ import { getForecasts } from "../../api/api";
 import { setForecasts } from "../../slices/locationSlice";
 
 function getDayAndTemperature(element) {
-  let dateString = element.Date.split("T")[0];
-  let d = new Date(dateString);
-  let dayName = d.toString().split(" ")[0];
-  let temperature =
+  const dateString = element.Date.split("T")[0];
+  const d = new Date(dateString);
+  const weekday = d.toString().split(" ")[0];
+  const temperature =
     Math.abs(
       Math.round(
         element.Temperature.Maximum.Value + element.Temperature.Minimum.Value
       )
     ) / 2;
-  return [dayName, temperature, element.Temperature.Maximum.Unit];
+  return { weekday, temperature, unit: element.Temperature.Maximum.Unit };
 }
 
 function Forecasts() {
@@ -21,16 +21,13 @@ function Forecasts() {
   const location = useSelector((state) => state.locations.location);
   const dispatch = useDispatch();
 
-  let days = [];
+  let weeklyForcast = [];
 
   useEffect(() => {
     const promise = getForecasts(location.Key);
-    console.log("herer55555555");
     promise
       .then((res) => {
-        console.log("HERERHHERH33333333", res.data.DailyForecasts);
         dispatch(setForecasts(res.data.DailyForecasts));
-        console.log("HERERHHERH44444444444", forecasts);
       })
       .catch((err) => {
         console.log("err", err);
@@ -45,12 +42,10 @@ function Forecasts() {
         flexDirection: "row",
       }}
     >
-      {console.log("forecasts", forecasts)}
       {forecasts
         ? forecasts.map((element, key) => {
-            console.log("elementimpo", element);
-            days = [...days, getDayAndTemperature(element)];
-            console.log("days", days);
+            const dayForecast = getDayAndTemperature(element);
+            weeklyForcast.push(dayForecast);
             return (
               <div
                 style={{
@@ -60,12 +55,10 @@ function Forecasts() {
                 }}
                 key={key}
               >
-                {days.map((element) => {
-                  console.log(element);
-                  return element.map((temperature) => {
-                    return <div>{temperature}</div>;
-                  });
-                })}
+                <div>
+                  {dayForecast.weekday} {dayForecast.temperature}
+                  {dayForecast.unit}
+                </div>
               </div>
             );
           })
