@@ -1,26 +1,21 @@
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./components/home/Home";
 import Favorites from "./components/favorites/Favorites";
+import Toolbar from "./components/toolbar/Toolbar";
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <h3>Herolo Weather App</h3>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/favorites">Favorites</Link>
-          </li>
-        </ul>
+        <Toolbar />
         <Switch>
           <Route exact path="/">
             <Home />
           </Route>
-          <Route path="/favorites">{/* <Favorites /> */}</Route>
+          <Route path="/favorites">
+            <Favorites />
+          </Route>
         </Switch>
       </div>
     </Router>

@@ -19,6 +19,7 @@ const initialState = {
   },
   locationDetail: null,
   forecasts: null,
+  favorites: [],
 };
 
 export const locationsSlice = createSlice({
@@ -41,11 +42,20 @@ export const locationsSlice = createSlice({
       state.forecasts = action.payload;
       console.log("getForecasts", action.payload);
     },
+    setFavorites: (state, action) => {
+      state.favorites = action.payload;
+      console.log("favorites", action.payload);
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setLocationsByName, setLocation, setForecasts, locationDetail } =
-  locationsSlice.actions;
+export const {
+  setLocationsByName,
+  setLocation,
+  setForecasts,
+  locationDetail,
+  setFavorites,
+} = locationsSlice.actions;
 
 export default locationsSlice.reducer;

@@ -1,5 +1,7 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getForecasts } from "../../api/api";
+import { setForecasts } from "../../slices/locationSlice";
 
 function getDayAndTemperature(element) {
   let dateString = element.Date.split("T")[0];
@@ -16,7 +18,24 @@ function getDayAndTemperature(element) {
 
 function Forecasts() {
   const forecasts = useSelector((state) => state.locations.forecasts);
+  const location = useSelector((state) => state.locations.location);
+  const dispatch = useDispatch();
+
   let days = [];
+
+  useEffect(() => {
+    const promise = getForecasts(location.Key);
+    console.log("herer55555555");
+    promise
+      .then((res) => {
+        console.log("HERERHHERH33333333", res.data.DailyForecasts);
+        dispatch(setForecasts(res.data.DailyForecasts));
+        console.log("HERERHHERH44444444444", forecasts);
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+  }, []);
 
   return (
     <div
@@ -28,7 +47,7 @@ function Forecasts() {
     >
       {console.log("forecasts", forecasts)}
       {forecasts
-        ? forecasts.DailyForecasts.map((element, key) => {
+        ? forecasts.map((element, key) => {
             console.log("elementimpo", element);
             days = [...days, getDayAndTemperature(element)];
             console.log("days", days);
@@ -43,8 +62,8 @@ function Forecasts() {
               >
                 {days.map((element) => {
                   console.log(element);
-                  element.map((temperature) => {
-                    <div>{temperature}</div>;
+                  return element.map((temperature) => {
+                    return <div>{temperature}</div>;
                   });
                 })}
               </div>

@@ -25,7 +25,9 @@ function Search() {
       .then((res) => {
         dispatch(setLocationsByName(res.data));
       })
-      .catch((e) => {});
+      .catch((err) => {
+        console.log("err", err);
+      });
   }
 
   function selectCity(element) {
@@ -35,20 +37,24 @@ function Search() {
     promise
       .then((res) => {
         dispatch(locationDetail(res.data[0]));
-        _getForecasts(element);
+        // _getForecasts(element);
       })
-      .catch((e) => {});
+      .catch((err) => {
+        console.log("err", err);
+      });
   }
 
-  function _getForecasts(element) {
-    const promise = getForecasts(element.Key);
-    promise
-      .then((res) => {
-        console.log(res);
-        dispatch(setForecasts(res.data));
-      })
-      .catch((e) => {});
-  }
+  // function _getForecasts(element) {
+  //   const promise = getForecasts(element.Key);
+  //   promise
+  //     .then((res) => {
+  //       console.log(res);
+  //       dispatch(setForecasts(res.data));
+  //     })
+  //     .catch((err) => {
+  //       console.log("err", err);
+  //     });
+  // }
 
   return (
     <div>
