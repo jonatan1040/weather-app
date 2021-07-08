@@ -2,77 +2,69 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setFavorites, removeFavorite } from "../../slices/locationSlice";
 import heart from "../../images/heart.png";
+import heart_red from "../../images/heart-red.png";
+import Modal from "../../error-handaling-modal/MyModal";
 
 function Wishlist() {
   const [heartColor, setHeartColor] = useState();
+  const [favText, setFavText] = useState();
+
   const dispatch = useDispatch();
 
   const location = useSelector((state) => state.locations.location);
-  const locationsByName = useSelector(
-    (state) => state.locations.locationsByName
-  );
   const locationDetail = useSelector((state) => state.locations.locationDetail);
   const favorites = useSelector((state) => state.locations.favorites);
-  console.log("Wishlist location", location);
-  console.log("Wishlist locationsByName", locationsByName);
-  console.log("Wishlist locationDetail", locationDetail);
-  console.log("Wishlist favorites", favorites);
 
   function addToFavorite() {
-    const data = favorites.find(
-      (item) => item.EpochTime === locationDetail.EpochTime
-    );
-    console.log("Wishlist data1", data);
+    const data = favorites.find((item) => item.location.Key === location.Key);
     if (data === undefined) {
-      // setHeartColor("red");
-      // const data = favorites.filter((item) => item.Key !== location.Key);
-      console.log("Wishlist data2", data);
-      dispatch(setFavorites(locationDetail));
+      dispatch(
+        setFavorites({ location: location, locationDetail: locationDetail })
+      );
     }
   }
 
   function deleteFromFavorite() {
-    // setHeartColor("white");
-    const data = favorites.filter(
-      (item) => item.EpochTime !== locationDetail.EpochTime
-    );
-    console.log("Wishlist data3", data);
+    const data = favorites.filter((item) => item.location.Key !== location.Key);
     dispatch(removeFavorite(data));
   }
 
   useEffect(() => {
-    let data2 = favorites.find(
-      (item) => item.EpochTime === locationDetail.EpochTime
-    );
+    let data2 = favorites.find((item) => item.location.Key === location.Key);
     if (data2 === undefined) {
-      setHeartColor("white");
+      setHeartColor(heart);
+      setFavText("Add to Favorites");
     } else {
-      setHeartColor("red");
+      setHeartColor(heart_red);
+      setFavText("Remove From Favorites");
     }
   });
 
   return (
     <div>
       <img
-        src={heart}
+        src={heartColor}
         alt="wishlist"
         style={{
           width: "35px",
           height: "35px",
-          backgroundColor: heartColor,
         }}
       ></img>
-      {console.log("heartColor", heartColor)}
       <button
         onClick={() => {
-          if (heartColor === "white") {
+          <Modal
+            title={"srhsrhswrhxcbx"}
+            msg={"sgshrhrshsrh"}
+            saveModalDetails={"ab s432v"}
+          />;
+          if (heartColor === heart) {
             addToFavorite();
           } else {
             deleteFromFavorite();
           }
         }}
       >
-        Add to Favorites
+        {favText}
       </button>
     </div>
   );

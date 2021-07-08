@@ -19,12 +19,17 @@ function getDayAndTemperature(element) {
 function Forecasts() {
   const forecasts = useSelector((state) => state.locations.forecasts);
   const location = useSelector((state) => state.locations.location);
+  const fahrenheitOrcelsius = useSelector(
+    (state) => state.locations.fahrenheitOrcelsius
+  );
   const dispatch = useDispatch();
 
   let weeklyForcast = [];
+  let metric = true;
+  fahrenheitOrcelsius !== "celsius" ? (metric = false) : (metric = true);
 
   useEffect(() => {
-    const promise = getForecasts(location.Key);
+    const promise = getForecasts(location.Key, metric);
     promise
       .then((res) => {
         dispatch(setForecasts(res.data.DailyForecasts));
@@ -32,7 +37,7 @@ function Forecasts() {
       .catch((err) => {
         console.log("err", err);
       });
-  }, []);
+  }, [fahrenheitOrcelsius]);
 
   return (
     <div
@@ -56,8 +61,11 @@ function Forecasts() {
                 key={key}
               >
                 <div>
-                  {dayForecast.weekday} {dayForecast.temperature}
-                  {dayForecast.unit}
+                  <h3>{dayForecast.weekday}</h3>
+                  <p>
+                    {dayForecast.temperature}
+                    {dayForecast.unit}
+                  </p>
                 </div>
               </div>
             );

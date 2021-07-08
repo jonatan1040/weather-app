@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setLocationsByName,
-  setForecasts,
   setLocation,
   locationDetail,
 } from "../../slices/locationSlice";
-import { SearchData, LocationData, getForecasts } from "../../api/api";
+import { SearchData, LocationData } from "../../api/api";
 
 function Search() {
+  const [value, setValue] = useState();
   const dispatch = useDispatch();
 
   const defaultLocation = useSelector(
@@ -37,24 +37,11 @@ function Search() {
     promise
       .then((res) => {
         dispatch(locationDetail(res.data[0]));
-        // _getForecasts(element);
       })
       .catch((err) => {
         console.log("err", err);
       });
   }
-
-  // function _getForecasts(element) {
-  //   const promise = getForecasts(element.Key);
-  //   promise
-  //     .then((res) => {
-  //       console.log(res);
-  //       dispatch(setForecasts(res.data));
-  //     })
-  //     .catch((err) => {
-  //       console.log("err", err);
-  //     });
-  // }
 
   return (
     <div>
@@ -64,8 +51,14 @@ function Search() {
           type="text"
           id="location_input"
           name="location_input_name"
+          value={value}
           placeholder={defaultLocation}
-          onChange={(e) => FetchCitiesByString(e.target.value)}
+          onChange={(e) => {
+            let value = e.target.value;
+            value = value.replace(/[^A-Za-z]/gi, "");
+            setValue(value);
+            FetchCitiesByString(value);
+          }}
         ></input>
       </div>
       <div>

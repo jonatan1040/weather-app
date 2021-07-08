@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  fahrenheitOrcelsius: "celsius",
   locationsByName: [],
   location: {
     Version: 1,
@@ -26,6 +27,15 @@ export const locationsSlice = createSlice({
   name: "locations",
   initialState,
   reducers: {
+    setfahrenheitOrcelsius: (state, action) => {
+      if (state.fahrenheitOrcelsius === "celsius") {
+        state.fahrenheitOrcelsius = "fahrenheit";
+        console.log("fahrenheit", action.payload);
+      } else {
+        state.fahrenheitOrcelsius = "celsius";
+        console.log("celsius", action.payload);
+      }
+    },
     setLocationsByName: (state, action) => {
       state.locationsByName = action.payload;
       console.log("getLocationsByName", action.payload);
@@ -55,6 +65,7 @@ export const locationsSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const {
+  setfahrenheitOrcelsius,
   setLocationsByName,
   setLocation,
   setForecasts,

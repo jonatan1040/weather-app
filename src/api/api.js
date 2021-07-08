@@ -9,8 +9,8 @@ export function SearchData(localizedName, key = null) {
       apikey:
         //   "CvlRcIeIULTeijAKlwtvhOrOXSBSonYt", //jonatan
         // "KBdCykosegYv5bcUX41egCavx9CYRCxF", //shlomi
-        "KNBtrsLmUJN8jukFLPwfD2O2tNwTDvY2", //mayra
-      // "kMqbnAeg14A5d7GLAT5AiGgWtJ0hZk51", //ravit
+        // "KNBtrsLmUJN8jukFLPwfD2O2tNwTDvY2", //mayra
+        "kMqbnAeg14A5d7GLAT5AiGgWtJ0hZk51", //ravit
       q: localizedName,
       language: "en-us",
     },
@@ -20,8 +20,7 @@ export function SearchData(localizedName, key = null) {
   return axios(config);
 }
 
-export function getForecasts(key) {
-  console.log("getForecasts");
+export function getForecasts(key, metric) {
   let config = {
     method: "get",
     url: `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}`,
@@ -29,11 +28,11 @@ export function getForecasts(key) {
       apikey:
         //   "CvlRcIeIULTeijAKlwtvhOrOXSBSonYt", //jonatan
         // "KBdCykosegYv5bcUX41egCavx9CYRCxF", //shlomi
-        "KNBtrsLmUJN8jukFLPwfD2O2tNwTDvY2", //mayra
-      // "kMqbnAeg14A5d7GLAT5AiGgWtJ0hZk51", //ravit
+        // "KNBtrsLmUJN8jukFLPwfD2O2tNwTDvY2", //mayra
+        "kMqbnAeg14A5d7GLAT5AiGgWtJ0hZk51", //ravit
       language: "en-us",
       details: false,
-      metric: true,
+      metric: metric,
     },
     headers: {},
   };
@@ -49,8 +48,8 @@ export function LocationData(key) {
       apikey:
         //   "CvlRcIeIULTeijAKlwtvhOrOXSBSonYt", //jonatan
         // "KBdCykosegYv5bcUX41egCavx9CYRCxF", //shlomi
-        "KNBtrsLmUJN8jukFLPwfD2O2tNwTDvY2", //mayra
-      // "kMqbnAeg14A5d7GLAT5AiGgWtJ0hZk51", //ravit
+        // "KNBtrsLmUJN8jukFLPwfD2O2tNwTDvY2", //mayra
+        "kMqbnAeg14A5d7GLAT5AiGgWtJ0hZk51", //ravit
       language: "en-us",
       details: false,
       metric: true,
@@ -60,3 +59,26 @@ export function LocationData(key) {
 
   return axios(config);
 }
+
+// export function GeoLocation(lat, lon) {
+//   let geolocation = `${(lat, lon)}`;
+//   console.log(geolocation);
+//   let config = {
+//     method: "get",
+//     url: "http://dataservice.accuweather.com/locations/v1/cities/geoposition/search",
+//     params: {
+//       apikey:
+//         //   "CvlRcIeIULTeijAKlwtvhOrOXSBSonYt", //jonatan
+//         // "KBdCykosegYv5bcUX41egCavx9CYRCxF", //shlomi
+//         // "KNBtrsLmUJN8jukFLPwfD2O2tNwTDvY2", //mayra
+//         "kMqbnAeg14A5d7GLAT5AiGgWtJ0hZk51", //ravit
+//       q: geolocation,
+//       language: "en-us",
+//       details: true,
+//       toplevel: false,
+//     },
+//     headers: {},
+//   };
+
+//   return axios(config);
+// }
