@@ -9,21 +9,30 @@ function Toolbar() {
   const dispatch = useDispatch();
 
   return (
-    <div>
-      <h3>Herolo Weather App</h3>
-      <button>
-        <Link to="/">Home</Link>
-      </button>
-      <button>
-        <Link to="/favorites">Favorites</Link>
-      </button>
-      <button
-        onClick={() => {
-          dispatch(setfahrenheitOrcelsius());
-        }}
-      >
-        F/C
-      </button>
+    <div className="row m-5">
+      <div className="col col-sm-4">
+        <h3>Herolo Weather App</h3>
+      </div>
+      <div className="col col-sm">
+        <button className="col border-0">
+          <Link to="/" className="text-decoration-none text-reset">
+            Home
+          </Link>
+        </button>
+        <button className="col border-0">
+          <Link to="/favorites" className="text-decoration-none text-reset">
+            Favorites
+          </Link>
+        </button>
+        <button
+          className="col border-0"
+          onClick={() => {
+            dispatch(setfahrenheitOrcelsius());
+          }}
+        >
+          Change Degrees To: {fahrenheitOrcelsius}
+        </button>
+      </div>
     </div>
   );
 }

@@ -21,6 +21,7 @@ const initialState = {
   locationDetail: null,
   forecasts: null,
   favorites: [],
+  showError: false,
 };
 
 export const locationsSlice = createSlice({
@@ -60,6 +61,10 @@ export const locationsSlice = createSlice({
       state.favorites = action.payload;
       console.log("favorites", action.payload);
     },
+    toggleShowError: (state, action) => {
+      state.showError = action.payload;
+      console.log("showError", action.payload);
+    },
   },
 });
 
@@ -72,6 +77,7 @@ export const {
   locationDetail,
   setFavorites,
   removeFavorite,
+  toggleShowError,
 } = locationsSlice.actions;
 
 export default locationsSlice.reducer;

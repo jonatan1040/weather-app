@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getForecasts } from "../../api/api";
-import { setForecasts } from "../../slices/locationSlice";
+import { setForecasts, toggleShowError } from "../../slices/locationSlice";
 
 function getDayAndTemperature(element) {
   const dateString = element.Date.split("T")[0];
@@ -35,42 +35,48 @@ function Forecasts() {
         dispatch(setForecasts(res.data.DailyForecasts));
       })
       .catch((err) => {
-        console.log("err", err);
+        // dispatch(toggleShowError(true));
       });
   }, [fahrenheitOrcelsius]);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-evenly",
-        flexDirection: "row",
-      }}
-    >
-      {forecasts
-        ? forecasts.map((element, key) => {
-            const dayForecast = getDayAndTemperature(element);
-            weeklyForcast.push(dayForecast);
-            return (
-              <div
-                style={{
-                  whiteSpace: "pre-line",
-                  border: "1px solid black",
-                  padding: "20px",
-                }}
-                key={key}
-              >
-                <div>
-                  <h3>{dayForecast.weekday}</h3>
-                  <p>
-                    {dayForecast.temperature}
-                    {dayForecast.unit}
-                  </p>
+    <div className="col">
+      <div
+        className="row row-cols-1 row-cols-md-2 g-4"
+        // style={{
+        //   display: "flex",
+        //   justifyContent: "space-evenly",
+        //   flexDirection: "row",
+        // }}
+      >
+        {forecasts
+          ? forecasts.map((element, key) => {
+              const dayForecast = getDayAndTemperature(element);
+              weeklyForcast.push(dayForecast);
+              return (
+                <div className="col">
+                  <div
+                    // style={{
+                    //   whiteSpace: "pre-line",
+                    //   border: "1px solid black",
+                    //   padding: "20px",
+                    // }}
+                    key={key}
+                    className="card"
+                  >
+                    <div class="card-body">
+                      <h3 className="card-title">{dayForecast.weekday}</h3>
+                      <p className="card-text">
+                        {dayForecast.temperature}
+                        {dayForecast.unit}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            );
-          })
-        : console.log("mf")}
+              );
+            })
+          : console.log("mf")}
+      </div>
     </div>
   );
 }

@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { setFavorites, removeFavorite } from "../../slices/locationSlice";
 import heart from "../../images/heart.png";
 import heart_red from "../../images/heart-red.png";
-import Modal from "../../error-handaling-modal/MyModal";
 
 function Wishlist() {
   const [heartColor, setHeartColor] = useState();
@@ -41,31 +40,31 @@ function Wishlist() {
   });
 
   return (
-    <div>
-      <img
-        src={heartColor}
-        alt="wishlist"
-        style={{
-          width: "35px",
-          height: "35px",
-        }}
-      ></img>
-      <button
-        onClick={() => {
-          <Modal
-            title={"srhsrhswrhxcbx"}
-            msg={"sgshrhrshsrh"}
-            saveModalDetails={"ab s432v"}
-          />;
-          if (heartColor === heart) {
-            addToFavorite();
-          } else {
-            deleteFromFavorite();
-          }
-        }}
-      >
-        {favText}
-      </button>
+    <div className="col">
+      <div class="text-center">
+        <img
+          className="m-2"
+          src={heartColor}
+          alt="wishlist"
+          // style={{
+          //   width: "35px",
+          //   height: "35px",
+          // }}
+        ></img>
+
+        <button
+          className="m-2"
+          onClick={() => {
+            if (heartColor === heart) {
+              addToFavorite();
+            } else {
+              deleteFromFavorite();
+            }
+          }}
+        >
+          {favText}
+        </button>
+      </div>
     </div>
   );
 }

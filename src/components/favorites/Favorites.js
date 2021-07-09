@@ -11,57 +11,74 @@ function Favorites() {
     (state) => state.locations.fahrenheitOrcelsius
   );
 
-  useEffect(() => {});
+  // useEffect(() => {});
 
   return (
-    <Link to="/">
+    <Link to="/" className="text-decoration-none text-reset m-5">
       <div
-        style={{
-          display: "flex",
-          justifyContent: "space-evenly",
-          flexDirection: "row",
-        }}
+        className="col"
+        // style={{
+        //   display: "flex",
+        //   justifyContent: "space-evenly",
+        //   flexDirection: "row",
+        // }}
       >
-        {favorites.map((element, key) => {
-          return fahrenheitOrcelsius === "celsius" ? (
-            <div
-              style={{
-                whiteSpace: "pre-line",
-                border: "1px solid black",
-                padding: "20px",
-              }}
-              key={key}
-              onClick={() => {
-                dispatch(setLocation(element.location));
-                console.log(element.location);
-              }}
-            >
-              <h3>{element.location.LocalizedName}</h3>
-              <h3>{element.location.Country.ID}</h3>
-              <p>
-                {element.locationDetail.Temperature.Metric.Value}
-                {element.locationDetail.Temperature.Metric.Unit}
-              </p>
-              <p>{element.locationDetail.WeatherText}</p>
-            </div>
-          ) : (
-            <div
-              style={{
-                whiteSpace: "pre-line",
-                border: "1px solid black",
-                padding: "20px",
-              }}
-              key={key}
-            >
-              <h3>{element.location.LocalizedName}</h3>
-              <p>
-                {element.locationDetail.Temperature.Imperial.Value}
-                {element.locationDetail.Temperature.Imperial.Unit}
-              </p>
-              <p>{element.locationDetail.WeatherText}</p>
-            </div>
-          );
-        })}
+        <div className="row row-cols-1 row-cols-md-2 g-4">
+          {favorites.map((element, key) => {
+            return fahrenheitOrcelsius === "celsius" ? (
+              <div className="col">
+                <div
+                  // style={{
+                  //   whiteSpace: "pre-line",
+                  //   border: "1px solid black",
+                  //   padding: "20px",
+                  // }}
+                  key={key}
+                  className="card"
+                  onClick={() => {
+                    dispatch(setLocation(element.location));
+                    console.log(element.location);
+                  }}
+                >
+                  <div class="card-body">
+                    <h3 className="card-title">
+                      {element.location.LocalizedName}
+                    </h3>
+                    <h3>{element.location.Country.ID}</h3>
+                    <p className="card-text">
+                      {element.locationDetail.Temperature.Metric.Value}
+                      {element.locationDetail.Temperature.Metric.Unit}
+                    </p>
+                    <p>{element.locationDetail.WeatherText}</p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="col">
+                <div
+                  // style={{
+                  //   whiteSpace: "pre-line",
+                  //   border: "1px solid black",
+                  //   padding: "20px",
+                  // }}
+                  key={key}
+                  className="card"
+                >
+                  <div class="card-body">
+                    <h3 className="card-title">
+                      {element.location.LocalizedName}
+                    </h3>
+                    <p className="card-text">
+                      {element.locationDetail.Temperature.Imperial.Value}
+                      {element.locationDetail.Temperature.Imperial.Unit}
+                    </p>
+                    <p>{element.locationDetail.WeatherText}</p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </Link>
   );

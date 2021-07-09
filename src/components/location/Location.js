@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { LocationData, GeoLocation } from "../../api/api";
-import { locationDetail } from "../../slices/locationSlice";
+import { locationDetail, toggleShowError } from "../../slices/locationSlice";
 
 function Location() {
   const location = useSelector((state) => state.locations.location);
@@ -11,6 +11,7 @@ function Location() {
   const fahrenheitOrcelsius = useSelector(
     (state) => state.locations.fahrenheitOrcelsius
   );
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -44,42 +45,45 @@ function Location() {
         dispatch(locationDetail(res.data[0]));
       })
       .catch((err) => {
+        // dispatch(toggleShowError(true));
         console.log("err", err);
       });
   }, []);
 
   return (
-    <div>
-      <div>
-        {location && locationDetails ? (
-          fahrenheitOrcelsius === "celsius" ? (
-            <div>
-              <h3>{location.LocalizedName}</h3>
-              <p>
-                {locationDetails.Temperature.Metric.Value}
-                {locationDetails.Temperature.Metric.Unit}
-              </p>
-            </div>
-          ) : (
-            <div>
-              <h3>{location.LocalizedName}</h3>
-              <p>
-                {locationDetails.Temperature.Imperial.Value}
-                {locationDetails.Temperature.Imperial.Unit}
-              </p>
-            </div>
-          )
+    // <div className="row">
+    <div className="col">
+      {location && locationDetails ? (
+        fahrenheitOrcelsius === "celsius" ? (
+          <div className="row">
+            <h3>{location.LocalizedName}</h3>
+            <p>
+              {locationDetails.Temperature.Metric.Value}
+              {locationDetails.Temperature.Metric.Unit}
+            </p>
+          </div>
         ) : (
-          <p>
-            {/* {console.log("location", location)} */}
-            {/* {console.log("locationDetail", locationDetails)} */}
-          </p>
-        )}
+          <div className="row">
+            <h3>{location.LocalizedName}</h3>
+            <p>
+              {locationDetails.Temperature.Imperial.Value}
+              {locationDetails.Temperature.Imperial.Unit}
+            </p>
+          </div>
+        )
+      ) : (
+        <p>
+          {/* {console.log("location", location)} */}
+          {/* {console.log("locationDetail", locationDetails)} */}
+        </p>
+      )}
+      <div className="row">
         <h1>{locationDetails ? locationDetails.WeatherText : ""}</h1>
-        {console.log("locationDetails", locationDetails)}
-        {console.log("location", location)}
       </div>
+      {console.log("locationDetails", locationDetails)}
+      {console.log("location", location)}
     </div>
+    // </div>
   );
 }
 

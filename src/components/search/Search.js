@@ -4,6 +4,7 @@ import {
   setLocationsByName,
   setLocation,
   locationDetail,
+  toggleShowError,
 } from "../../slices/locationSlice";
 import { SearchData, LocationData } from "../../api/api";
 
@@ -12,7 +13,7 @@ function Search() {
   const dispatch = useDispatch();
 
   const defaultLocation = useSelector(
-    (state) => state.locations.defaultLocation
+    (state) => state.locations.location.LocalizedName
   );
 
   const locationsByName = useSelector(
@@ -26,7 +27,7 @@ function Search() {
         dispatch(setLocationsByName(res.data));
       })
       .catch((err) => {
-        console.log("err", err);
+        // dispatch(toggleShowError(true));
       });
   }
 
@@ -39,15 +40,15 @@ function Search() {
         dispatch(locationDetail(res.data[0]));
       })
       .catch((err) => {
-        console.log("err", err);
+        dispatch(toggleShowError(true));
       });
   }
 
   return (
-    <div>
+    <div className="row m-5">
       <div>
-        <label for="location_input">Enter Location: </label>
         <input
+          class="form-control me-2"
           type="text"
           id="location_input"
           name="location_input_name"
@@ -61,20 +62,18 @@ function Search() {
           }}
         ></input>
       </div>
-      <div>
-        {locationsByName.map((element, key) => {
-          return (
-            <div
-              key={key}
-              onClick={() => {
-                selectCity(element);
-              }}
-            >
-              {element["LocalizedName"]}
-            </div>
-          );
-        })}
-      </div>
+      {locationsByName.map((element, key) => {
+        return (
+          <div
+            key={key}
+            onClick={() => {
+              selectCity(element);
+            }}
+          >
+            {element["LocalizedName"]}
+          </div>
+        );
+      })}
     </div>
   );
 }
