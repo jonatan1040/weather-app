@@ -9,9 +9,7 @@ function App() {
   return (
     <Router>
       <div className="container">
-        {/* <div class="row"> */}
         <Toolbar />
-        {/* </div> */}
         <Error />
         <Switch>
           <Route exact path="/">

@@ -30,7 +30,8 @@ function Toolbar() {
             dispatch(setfahrenheitOrcelsius());
           }}
         >
-          Change Degrees To: {fahrenheitOrcelsius}
+          Change Degrees To:
+          {fahrenheitOrcelsius === "celsius" ? "Fahrenheit" : "Celsius"}
         </button>
       </div>
     </div>
