@@ -1,13 +1,24 @@
 /* .App {
   text-align: center;
 }  */
-.button{
+button{
   /* background-color: #007bff40; */
-  background-color: #007bff91;
+  /* background-color: #007bff91; */
 }
 body{
-  background-color:linear-gradient(#05336b 9%,#0d5ab9)
+  background-image:linear-gradient(#69a9bf,#a3d4dd,#f8fcfd);
+  background-repeat: no-repeat;
+  background-size: auto;
 }
+.forcast_divider{
+  border-top: 3px solid rgb(13 110 253 / 25%);
+  padding-top: 5px;
+}
+
+.forcast_title{
+  margin-bottom: 5px;
+}
+
 /* 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;

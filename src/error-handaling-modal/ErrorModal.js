@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useSelector, useDispatch } from "react-redux";
@@ -8,11 +8,8 @@ function Error(props) {
   const dispatch = useDispatch();
   const toggleError = useSelector((state) => state.locations.showError);
 
-  // const [show, setShow] = useState(false);
-
   const handleClose = () => {
     dispatch(toggleShowError({ toggle: false, title: "", message: "" }));
-    // const handleShow = () => setShow(true);
   };
   return (
     <>

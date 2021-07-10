@@ -7,13 +7,13 @@ function getDayAndTemperature(element) {
   const dateString = element.Date.split("T")[0];
   const d = new Date(dateString);
   const weekday = d.toString().split(" ")[0];
-  const temperature =
+  const avgTemperature =
     Math.abs(
       Math.round(
         element.Temperature.Maximum.Value + element.Temperature.Minimum.Value
       )
     ) / 2;
-  return { weekday, temperature, unit: element.Temperature.Maximum.Unit };
+  return { weekday, avgTemperature, unit: element.Temperature.Maximum.Unit };
 }
 
 function Forecasts() {
@@ -21,6 +21,9 @@ function Forecasts() {
   const location = useSelector((state) => state.locations.location);
   const fahrenheitOrcelsius = useSelector(
     (state) => state.locations.fahrenheitOrcelsius
+  );
+  const weatherIconsFolder = useSelector(
+    (state) => state.locations.weatherIconsFolder
   );
   const dispatch = useDispatch();
 
@@ -35,7 +38,6 @@ function Forecasts() {
         dispatch(setForecasts(res.data.DailyForecasts));
       })
       .catch((err) => {
-        // console.log("ERROR", err);
         dispatch(
           toggleShowError({
             toggle: true,
@@ -47,42 +49,90 @@ function Forecasts() {
   }, [fahrenheitOrcelsius]);
 
   return (
-    <div className="col">
-      <div
-        className="row row-cols-1 row-cols-md-2 g-4"
-        // style={{
-        //   display: "flex",
-        //   justifyContent: "space-evenly",
-        //   flexDirection: "row",
-        // }}
-      >
+    <div className="col-5 text-center">
+      <div className="row row-cols-1 row-cols-md-2 g-4">
         {forecasts
           ? forecasts.map((element, key) => {
               const dayForecast = getDayAndTemperature(element);
               weeklyForcast.push(dayForecast);
               return (
                 <div className="col">
-                  <div
-                    // style={{
-                    //   whiteSpace: "pre-line",
-                    //   border: "1px solid black",
-                    //   padding: "20px",
-                    // }}
-                    key={key}
-                    className="card"
-                  >
+                  <div key={key} className="card">
                     <div className="card-body">
-                      <h3 className="card-title">{dayForecast.weekday}</h3>
-                      <p className="card-text">
-                        {dayForecast.temperature}
-                        {dayForecast.unit}
-                      </p>
+                      <div className="row forcast_title">
+                        <div className="col">
+                          <div className="row">
+                            <div className="col">
+                              <h3 className="card-title">
+                                {dayForecast.weekday}
+                              </h3>
+                            </div>
+                            <div className="col">
+                              <h3 className="card-text">
+                                {dayForecast.avgTemperature}
+                                {dayForecast.unit}
+                              </h3>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-4">
+                          <img
+                            src={
+                              weatherIconsFolder[`${element.Day.Icon}.png`]
+                                .default
+                            }
+                            alt="weather_icon"
+                          ></img>
+                        </div>
+                      </div>
+
+                      <div className="row forcast_divider">
+                        <div className="col">
+                          <h4>Day</h4>
+                          <h5 className="col">{element.Day.IconPhrase}</h5>
+                          <img
+                            className="col"
+                            src={
+                              weatherIconsFolder[`${element.Day.Icon}.png`]
+                                .default
+                            }
+                            alt="weather_icon"
+                          ></img>
+                        </div>
+                        <div className="col">
+                          <h4>Night</h4>
+                          <h5 className="col">{element.Night.IconPhrase}</h5>
+                          <img
+                            className="col"
+                            src={
+                              weatherIconsFolder[`${element.Night.Icon}.png`]
+                                .default
+                            }
+                            alt="weather_icon"
+                          ></img>
+                        </div>
+                      </div>
+
+                      <div className="row">
+                        <div className="col">
+                          <div>
+                            {element.Temperature.Maximum.Value}
+                            {element.Temperature.Maximum.Unit}
+                          </div>
+                        </div>
+                        <div className="col">
+                          <div>
+                            {element.Temperature.Minimum.Value}
+                            {element.Temperature.Minimum.Unit}
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               );
             })
-          : console.log("mf")}
+          : ""}
       </div>
     </div>
   );

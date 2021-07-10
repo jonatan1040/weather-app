@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { LocationData, GeoLocation } from "../../api/api";
-import { locationDetail, toggleShowError } from "../../slices/locationSlice";
+import { LocationData } from "../../api/api";
+import {
+  locationDetail,
+  toggleShowError,
+  setIconsFolder,
+} from "../../slices/locationSlice";
 
 function Location() {
   const location = useSelector((state) => state.locations.location);
@@ -10,6 +14,9 @@ function Location() {
   );
   const fahrenheitOrcelsius = useSelector(
     (state) => state.locations.fahrenheitOrcelsius
+  );
+  const weatherIconsFolder = useSelector(
+    (state) => state.locations.weatherIconsFolder
   );
 
   const dispatch = useDispatch();
@@ -55,42 +62,70 @@ function Location() {
         // console.log("errname", err.name);
         // console.log("errmessage", err.message);
       });
+
+    dispatch(setIconsFolder(images));
   }, []);
 
+  function importAll(r) {
+    let images = {};
+    r.keys().forEach((item, index) => {
+      images[item.replace(/-s/gi, "").replace("./", "")] = r(item);
+    });
+    return images;
+  }
+
+  const images = importAll(
+    require.context("../../images/weather-icons", false, /\.(png|jpe?g|svg)$/)
+  );
+
   return (
-    // <div className="row">
     <div className="col">
       {location && locationDetails ? (
         fahrenheitOrcelsius === "celsius" ? (
-          <div className="row">
-            <h3>{location.LocalizedName}</h3>
+          <div key={location.LocalizedName} className="row">
+            <h1>
+              {location.LocalizedName},{location.Country.ID}
+            </h1>
             <p>
               {locationDetails.Temperature.Metric.Value}
               {locationDetails.Temperature.Metric.Unit}
             </p>
+            <div className="row">
+              <h3>{locationDetails ? locationDetails.WeatherText : ""}</h3>
+              <img
+                src={
+                  weatherIconsFolder[`${locationDetails.WeatherIcon}.png`]
+                    .default
+                }
+                alt="weather_icon"
+              ></img>
+            </div>
           </div>
         ) : (
-          <div className="row">
-            <h3>{location.LocalizedName}</h3>
+          <div key={location.LocalizedName} className="row">
+            <h1>
+              {location.LocalizedName},{location.Country.ID}
+            </h1>
             <p>
               {locationDetails.Temperature.Imperial.Value}
               {locationDetails.Temperature.Imperial.Unit}
             </p>
+            <div className="row">
+              <h3>{locationDetails ? locationDetails.WeatherText : ""}</h3>
+              <img
+                src={
+                  weatherIconsFolder[`${locationDetails.WeatherIcon}.png`]
+                    .default
+                }
+                alt="weather_icon"
+              ></img>
+            </div>
           </div>
         )
       ) : (
-        <p>
-          {/* {console.log("location", location)} */}
-          {/* {console.log("locationDetail", locationDetails)} */}
-        </p>
+        <div>{""}</div>
       )}
-      <div className="row">
-        <h1>{locationDetails ? locationDetails.WeatherText : ""}</h1>
-      </div>
-      {console.log("locationDetails", locationDetails)}
-      {console.log("location", location)}
     </div>
-    // </div>
   );
 }
 

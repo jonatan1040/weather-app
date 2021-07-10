@@ -40,18 +40,9 @@ function Wishlist() {
   });
 
   return (
-    <div className="col">
+    <div className="col-4">
       <div className="text-center">
-        <img
-          className="m-2"
-          src={heartColor}
-          alt="wishlist"
-          // style={{
-          //   width: "35px",
-          //   height: "35px",
-          // }}
-        ></img>
-
+        <img className="m-2" src={heartColor} alt="wishlist"></img>
         <button
           className="m-2"
           onClick={() => {

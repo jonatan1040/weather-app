@@ -27,7 +27,6 @@ function Search() {
         dispatch(setLocationsByName(res.data));
       })
       .catch((err) => {
-        // console.log("ERROR", err);
         dispatch(
           toggleShowError({
             toggle: true,
@@ -47,7 +46,6 @@ function Search() {
         dispatch(locationDetail(res.data[0]));
       })
       .catch((err) => {
-        // console.log("ERROR", err);
         dispatch(
           toggleShowError({
             toggle: true,
