@@ -45,7 +45,7 @@ function Location() {
         dispatch(locationDetail(res.data[0]));
       })
       .catch((err) => {
-        // dispatch(toggleShowError(true));
+        dispatch(toggleShowError(true));
         console.log("err", err);
       });
   }, []);

@@ -4,7 +4,7 @@ export function SearchData(localizedName, key = null) {
   console.log("localizedName", localizedName);
   let config = {
     method: "get",
-    url: "https://dataservice.accuweather.com/locations/v1/cities/autocomplete",
+    url: "http://dataservice.accuweather.com/locations/v1/cities/autocomplete",
     params: {
       apikey:
         //   "CvlRcIeIULTeijAKlwtvhOrOXSBSonYt", //jonatan
@@ -23,7 +23,7 @@ export function SearchData(localizedName, key = null) {
 export function getForecasts(key, metric) {
   let config = {
     method: "get",
-    url: `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}`,
+    url: `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}`,
     params: {
       apikey:
         //   "CvlRcIeIULTeijAKlwtvhOrOXSBSonYt", //jonatan
@@ -43,7 +43,7 @@ export function getForecasts(key, metric) {
 export function LocationData(key) {
   let config = {
     method: "get",
-    url: `https://dataservice.accuweather.com/currentconditions/v1/${key}`,
+    url: `http://dataservice.accuweather.com/currentconditions/v1/${key}`,
     params: {
       apikey:
         //   "CvlRcIeIULTeijAKlwtvhOrOXSBSonYt", //jonatan

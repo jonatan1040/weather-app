@@ -27,7 +27,7 @@ function Search() {
         dispatch(setLocationsByName(res.data));
       })
       .catch((err) => {
-        // dispatch(toggleShowError(true));
+        dispatch(toggleShowError(true));
       });
   }
 

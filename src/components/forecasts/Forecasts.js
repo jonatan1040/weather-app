@@ -35,7 +35,7 @@ function Forecasts() {
         dispatch(setForecasts(res.data.DailyForecasts));
       })
       .catch((err) => {
-        // dispatch(toggleShowError(true));
+        dispatch(toggleShowError(true));
       });
   }, [fahrenheitOrcelsius]);
 
