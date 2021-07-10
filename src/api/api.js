@@ -3,7 +3,7 @@ const axios = require("axios");
 export function SearchData(localizedName, key = null) {
   let config = {
     method: "get",
-    url: "http://dataservice.accuweather.com/locations/v1/cities/autocomplete",
+    url: "https://dataservice.accuweather.com/locations/v1/cities/autocomplete",
     params: {
       apikey: process.env.REACT_APP_APIKEY,
       q: localizedName,
@@ -18,7 +18,7 @@ export function SearchData(localizedName, key = null) {
 export function getForecasts(key, metric) {
   let config = {
     method: "get",
-    url: `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}`,
+    url: `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}`,
     params: {
       apikey: process.env.REACT_APP_APIKEY,
       language: "en-us",
@@ -34,7 +34,7 @@ export function getForecasts(key, metric) {
 export function LocationData(key) {
   let config = {
     method: "get",
-    url: `http://dataservice.accuweather.com/currentconditions/v1/${key}`,
+    url: `https://dataservice.accuweather.com/currentconditions/v1/${key}`,
     params: {
       apikey: process.env.REACT_APP_APIKEY,
       language: "en-us",
@@ -52,7 +52,7 @@ export function LocationData(key) {
 //   console.log(geolocation);
 //   let config = {
 //     method: "get",
-//     url: "http://dataservice.accuweather.com/locations/v1/cities/geoposition/search",
+//     url: "https://dataservice.accuweather.com/locations/v1/cities/geoposition/search",
 //     params: {
 //       apikey:
 //         //   "CvlRcIeIULTeijAKlwtvhOrOXSBSonYt", //jonatan

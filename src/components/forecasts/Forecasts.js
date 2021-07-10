@@ -49,7 +49,7 @@ function Forecasts() {
   }, [fahrenheitOrcelsius]);
 
   return (
-    <div className="col col-sm-6 text-center">
+    <div className="col col-sm-5 text-center">
       <div className="row row-cols-1 row-cols-md-2 g-4">
         {forecasts
           ? forecasts.map((element, key) => {
