@@ -41,7 +41,7 @@ function Wishlist() {
 
   return (
     <div className="col">
-      <div class="text-center">
+      <div className="text-center">
         <img
           className="m-2"
           src={heartColor}

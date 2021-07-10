@@ -27,7 +27,14 @@ function Search() {
         dispatch(setLocationsByName(res.data));
       })
       .catch((err) => {
-        dispatch(toggleShowError(true));
+        // console.log("ERROR", err);
+        dispatch(
+          toggleShowError({
+            toggle: true,
+            title: err.name,
+            message: err.message,
+          })
+        );
       });
   }
 
@@ -40,7 +47,14 @@ function Search() {
         dispatch(locationDetail(res.data[0]));
       })
       .catch((err) => {
-        dispatch(toggleShowError(true));
+        // console.log("ERROR", err);
+        dispatch(
+          toggleShowError({
+            toggle: true,
+            title: err.name,
+            message: err.message,
+          })
+        );
       });
   }
 
@@ -48,7 +62,7 @@ function Search() {
     <div className="row m-5">
       <div>
         <input
-          class="form-control me-2"
+          className="form-control me-2"
           type="text"
           id="location_input"
           name="location_input_name"

@@ -10,20 +10,19 @@ function Error(props) {
 
   // const [show, setShow] = useState(false);
 
-  const handleClose = () => dispatch(toggleShowError(false));
-  // const handleShow = () => setShow(true);
-
+  const handleClose = () => {
+    dispatch(toggleShowError({ toggle: false, title: "", message: "" }));
+    // const handleShow = () => setShow(true);
+  };
   return (
     <>
-      <Modal show={toggleError} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+      <Modal show={toggleError.toggle} onHide={handleClose}>
+        <Modal.Header>
+          <Modal.Title>{toggleError.title}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Body>{toggleError.message}</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
+          <Button onClick={handleClose}>Close</Button>
         </Modal.Footer>
       </Modal>
     </>

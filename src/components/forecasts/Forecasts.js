@@ -35,7 +35,14 @@ function Forecasts() {
         dispatch(setForecasts(res.data.DailyForecasts));
       })
       .catch((err) => {
-        dispatch(toggleShowError(true));
+        // console.log("ERROR", err);
+        dispatch(
+          toggleShowError({
+            toggle: true,
+            title: err.name,
+            message: err.message,
+          })
+        );
       });
   }, [fahrenheitOrcelsius]);
 
@@ -64,7 +71,7 @@ function Forecasts() {
                     key={key}
                     className="card"
                   >
-                    <div class="card-body">
+                    <div className="card-body">
                       <h3 className="card-title">{dayForecast.weekday}</h3>
                       <p className="card-text">
                         {dayForecast.temperature}

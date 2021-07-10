@@ -2,7 +2,11 @@
   text-align: center;
 }  */
 .button{
-  background-color: #007bff40;
+  /* background-color: #007bff40; */
+  background-color: #007bff91;
+}
+body{
+  background-color:linear-gradient(#05336b 9%,#0d5ab9)
 }
 /* 
 .App-logo {

@@ -21,7 +21,7 @@ const initialState = {
   locationDetail: null,
   forecasts: null,
   favorites: [],
-  showError: false,
+  showError: { toggle: false, title: "", message: "" },
 };
 
 export const locationsSlice = createSlice({
@@ -62,8 +62,10 @@ export const locationsSlice = createSlice({
       console.log("favorites", action.payload);
     },
     toggleShowError: (state, action) => {
-      state.showError = action.payload;
-      console.log("showError", action.payload);
+      state.showError.toggle = action.payload.toggle;
+      state.showError.title = action.payload.title;
+      state.showError.message = action.payload.message;
+      console.log("showError", action);
     },
   },
 });

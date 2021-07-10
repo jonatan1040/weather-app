@@ -45,8 +45,15 @@ function Location() {
         dispatch(locationDetail(res.data[0]));
       })
       .catch((err) => {
-        dispatch(toggleShowError(true));
-        console.log("err", err);
+        dispatch(
+          toggleShowError({
+            toggle: true,
+            title: err.name,
+            message: err.message,
+          })
+        );
+        // console.log("errname", err.name);
+        // console.log("errmessage", err.message);
       });
   }, []);
 
