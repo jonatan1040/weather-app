@@ -47,25 +47,25 @@ export function LocationData(key) {
   return axios(config);
 }
 
-// export function GeoLocation(lat, lon) {
-//   let geolocation = `${(lat, lon)}`;
-//   console.log(geolocation);
-//   let config = {
-//     method: "get",
-//     url: "https://dataservice.accuweather.com/locations/v1/cities/geoposition/search",
-//     params: {
-//       apikey:
-//         //   "CvlRcIeIULTeijAKlwtvhOrOXSBSonYt", //jonatan
-//         // "KBdCykosegYv5bcUX41egCavx9CYRCxF", //shlomi
-//         // "KNBtrsLmUJN8jukFLPwfD2O2tNwTDvY2", //mayra
-//         "kMqbnAeg14A5d7GLAT5AiGgWtJ0hZk51", //ravit
-//       q: geolocation,
-//       language: "en-us",
-//       details: true,
-//       toplevel: false,
-//     },
-//     headers: {},
-//   };
+export function GeoLocation(lat, lon) {
+  let geolocation = `${lat},${lon}`;
+  console.log(geolocation);
+  let config = {
+    method: "get",
+    url: "https://dataservice.accuweather.com/locations/v1/cities/geoposition/search",
+    params: {
+      apikey:
+        //   "CvlRcIeIULTeijAKlwtvhOrOXSBSonYt", //jonatan
+        // "KBdCykosegYv5bcUX41egCavx9CYRCxF", //shlomi
+        // "KNBtrsLmUJN8jukFLPwfD2O2tNwTDvY2", //mayra
+        "kMqbnAeg14A5d7GLAT5AiGgWtJ0hZk51", //ravit
+      q: geolocation,
+      language: "en-us",
+      details: true,
+      toplevel: false,
+    },
+    headers: {},
+  };
 
-//   return axios(config);
-// }
+  return axios(config);
+}

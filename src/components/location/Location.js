@@ -59,8 +59,6 @@ function Location() {
             message: err.message,
           })
         );
-        // console.log("errname", err.name);
-        // console.log("errmessage", err.message);
       });
 
     dispatch(setIconsFolder(images));
