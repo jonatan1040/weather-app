@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { LocationData } from "../../api/api";
+import { LocationData, GeoLocation } from "../../api/api";
 import {
   locationDetail,
   toggleShowError,
   setIconsFolder,
+  setLocation,
+  setLocationsByName,
 } from "../../slices/locationSlice";
 
 function Location() {
@@ -22,29 +24,53 @@ function Location() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // let lon;
-    // let lat;
-    // navigator.geolocation.getCurrentPosition(
-    //   function (position) {
-    //     lon = position.coords.longitude;
-    //     lat = position.coords.latitude;
-    //     console.log("Latitude is :", lat);
-    //     console.log("Longitude is :", lon);
-    //   },
-    //   function (error) {
-    //     console.error("Error Code = " + error.code + " - " + error.message);
-    //   }
-    // );
-
-    // const promise2 = GeoLocation(lat, lon);
-    // promise2
-    //   .then((res) => {
-    //     console.log("HERHERHERHREHRE", res.data);
-    //     // dispatch(setLocation(res.data[0]));
-    //   })
-    //   .catch((err) => {
-    //     console.log("err", err);
-    //   });
+    let lon;
+    let lat;
+    navigator.geolocation.getCurrentPosition(
+      function (position) {
+        lon = position.coords.longitude;
+        lat = position.coords.latitude;
+        const promise2 = GeoLocation(lat, lon);
+        promise2
+          .then((res) => {
+            const element = res.data;
+            dispatch(setLocation(element));
+            dispatch(setLocationsByName([]));
+            const promise = LocationData(element.Key);
+            promise
+              .then((resp) => {
+                dispatch(locationDetail(resp.data[0]));
+              })
+              .catch((err) => {
+                dispatch(
+                  toggleShowError({
+                    toggle: true,
+                    title: err.name,
+                    message: err.message,
+                  })
+                );
+              });
+          })
+          .catch((err) => {
+            dispatch(
+              toggleShowError({
+                toggle: true,
+                title: err.name,
+                message: err.message,
+              })
+            );
+          });
+      },
+      function (error) {
+        dispatch(
+          toggleShowError({
+            toggle: true,
+            title: error.code,
+            message: error.message,
+          })
+        );
+      }
+    );
 
     const promise = LocationData(location.Key);
     promise

@@ -8,17 +8,31 @@ body{
   background-image:linear-gradient(#69a9bf,#a3d4dd,#f8fcfd);
   background-repeat: no-repeat;
   background-size: auto;
-/* animation: change 10s fadeIn linear 7s; */
-/* background-image: url("./images/intro.png"); */
-/* opacity: 0.5; */
-/* animation-delay: 20s */
+  position: relative;
+  overflow: hidden;
 }
 
-/* @keyframes change {
+@keyframes change {
   to {
-    opacity: 0
+    opacity: 0;
   }
-} */
+}
+.intro_image{
+  animation: change linear 3s;
+  background-image: url(./images/intro.png);
+  opacity: 1;
+  /* animation-delay: 20s; */
+  background-color: #fff;
+  width: 100vw;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
 
 .forcast_divider{
   border-top: 3px solid rgb(13 110 253 / 25%);

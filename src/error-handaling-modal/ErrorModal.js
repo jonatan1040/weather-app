@@ -4,7 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleShowError } from "../slices/locationSlice";
 
-function Error(props) {
+function Error() {
   const dispatch = useDispatch();
   const toggleError = useSelector((state) => state.locations.showError);
 
